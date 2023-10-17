@@ -16,6 +16,7 @@ const Bookviewer = ({
   }
   return (
     <div className="pdf-viewer">
+      <h2>Viewing Book</h2>
       <Document file={pdfUrl} onLoadSuccess={onDocumentLoadSuccess}>
         <Page
           className="document"

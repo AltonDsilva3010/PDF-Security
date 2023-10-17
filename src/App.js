@@ -6,8 +6,9 @@ import "react-pdf/dist/Page/TextLayer.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import AllBooks from "./Components/AllBooks";
 import Bookviewer from "./Components/Bookviewer";
-import abi from "./contracts/AuctionStrore.json";
+import abi from "./contracts/pdfsec.json";
 import AddaBook from "./Components/AddaBook";
+import MyBooks from "./Components/MyBooks";
 const { ethers } = require("ethers");
 
 function App() {
@@ -24,9 +25,11 @@ function App() {
     contract: null,
   });
 
+  const [addBookModal, setAddBookModal] = useState(false);
+
   useEffect(() => {
     const connectWallet = async () => {
-      const contractAddress = "0x78b190cc9165110C14FF12504461430294Dd96E4";
+      const contractAddress = "0x781d255d548a508E850E375dD4AEDb19B8082463";
       const contractABI = abi.abi;
       try {
         let provider = new ethers.BrowserProvider(window.ethereum);
@@ -69,12 +72,16 @@ function App() {
   function changePage(offSet) {
     setPageNumber((prevPageNumber) => prevPageNumber + offSet);
   }
-
   return (
     <div className="App">
-      <Navbar />
-      <AddaBook />
-      <AllBooks setCID={setCID} />
+      <Navbar
+        state={state}
+        setAddBookModal={setAddBookModal}
+        addBookModal={addBookModal}
+      />
+      {addBookModal && <AddaBook state={state} />}
+      <AllBooks setCID={setCID} state={state} />
+      <MyBooks setCID={setCID} state={state} />
       <Bookviewer
         pdfUrl={pdfUrl}
         onDocumentLoadSuccess={onDocumentLoadSuccess}

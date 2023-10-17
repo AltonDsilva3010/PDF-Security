@@ -1,7 +1,11 @@
 import React from "react";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ state, setAddBookModal, addBookModal }) => {
+  const toggleModal = () => {
+    setAddBookModal(!addBookModal);
+  };
+
   return (
     <div>
       <nav class="navbar navbar-expand-xl">
@@ -28,16 +32,16 @@ const Navbar = () => {
                 </a> */}
               </li>
               <li class="nav-item">
-                {/* <a class="nav-link" aria-current="page" onClick={toggleModal}>
-                  Add-Product
-                </a> */}
+                <a class="nav-link" aria-current="page" onClick={toggleModal}>
+                  Add-Book
+                </a>
               </li>
-              {/* <li
+              <li
                 class="nav-item"
                 style={{ display: state.provider ? "none" : "block" }}
               >
                 <a class="nav-link">Connect-Wallet</a>
-              </li> */}
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   About

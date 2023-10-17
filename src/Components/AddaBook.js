@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./AddaBook.css";
 
-const AddaBook = () => {
+const AddaBook = ({ state }) => {
   const [bookInfo, setBookInfo] = useState({
     title: "",
     author: "",
+    isbn: -1,
+    price: 0,
     pdfFile: null,
   });
 
@@ -17,14 +19,33 @@ const AddaBook = () => {
     setBookInfo({ ...bookInfo, pdfFile: file });
   };
 
-  const handleSubmit = (e) => {
+  const addBook = async () => {
+    console.log("inseid function 2");
+    const { contract } = state;
+    if (contract) {
+      const result = await contract.addBook(
+        "Book Title",
+        "David",
+        123,
+        1,
+        "ipfshash"
+      );
+      console.log(result);
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(bookInfo);
-    setBookInfo({
-      title: "",
-      author: "",
-      pdfFile: null,
-    });
+    try {
+      addBook();
+    } catch (error) {
+      console.log(error);
+    }
+    // setBookInfo({
+    //   title: "",
+    //   author: "",
+    //   pdfFile: null,
+    // });
   };
 
   return (
@@ -49,6 +70,28 @@ const AddaBook = () => {
             id="author"
             name="author"
             value={bookInfo.author}
+            onChange={onChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="isbn">ISBN:</label>
+          <input
+            type="number"
+            id="isbn"
+            name="isbn"
+            value={bookInfo.isbn}
+            onChange={onChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="price">Price:</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            value={bookInfo.price}
             onChange={onChange}
             required
           />
