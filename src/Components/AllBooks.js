@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Books from "./Books";
 
-const AllBooks = ({ setCID, state }) => {
+const AllBooks = ({ state }) => {
   const [allBooks, setAllBooks] = useState([]);
 
   useEffect(() => {
     const getAllBooks = async () => {
       console.log("inseid function 3");
       const { contract } = state;
+
       if (contract) {
         const result = await contract.getAllBooks();
         setAllBooks(result);
@@ -19,9 +20,9 @@ const AllBooks = ({ setCID, state }) => {
   return (
     <div className="all-books">
       <h3>All books Available</h3>
-      <div>
+      <div className="books-all">
         {allBooks.map((book, index) => {
-          return <Books book={book} index={index} />;
+          return <Books key={index} book={book} index={index} state={state} />;
         })}
         {/* <button
           onClick={() =>

@@ -9,15 +9,14 @@ import Bookviewer from "./Components/Bookviewer";
 import abi from "./contracts/pdfsec.json";
 import AddaBook from "./Components/AddaBook";
 import MyBooks from "./Components/MyBooks";
+import UploadPage from "./Components/UploadPage";
 const { ethers } = require("ethers");
 
 function App() {
   const [pdfUrl, setPdfUrl] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [cid, setCID] = useState(
-    "QmZmdtexNQFuBVNQyF4ZbmYB7yK77uYN97izoE1yyF1QvL"
-  );
+  const [cid, setCID] = useState(null);
 
   const [state, setState] = useState({
     provider: null,
@@ -29,7 +28,7 @@ function App() {
 
   useEffect(() => {
     const connectWallet = async () => {
-      const contractAddress = "0x781d255d548a508E850E375dD4AEDb19B8082463";
+      const contractAddress = "0x2Ed0100b7085759f4d60be15F370dbBfd17da2e5";
       const contractABI = abi.abi;
       try {
         let provider = new ethers.BrowserProvider(window.ethereum);
@@ -79,15 +78,17 @@ function App() {
         setAddBookModal={setAddBookModal}
         addBookModal={addBookModal}
       />
-      {addBookModal && <AddaBook state={state} />}
+      {addBookModal && <AddaBook state={state} style={{ zIndex: 1 }} />}
       <AllBooks setCID={setCID} state={state} />
       <MyBooks setCID={setCID} state={state} />
+      {/* <UploadPage /> */}
       <Bookviewer
         pdfUrl={pdfUrl}
         onDocumentLoadSuccess={onDocumentLoadSuccess}
         pageNumber={pageNumber}
         changePage={changePage}
         numPages={numPages}
+        style={{ zIndex: -1 }}
       />
     </div>
   );

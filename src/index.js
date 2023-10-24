@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { pdfjs } from "react-pdf";
-
+import { routers } from "./utils/router";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+const router = createBrowserRouter(routers);
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
   import.meta.url
@@ -10,7 +12,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

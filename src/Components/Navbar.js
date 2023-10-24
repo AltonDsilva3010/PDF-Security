@@ -27,9 +27,9 @@ const Navbar = ({ state, setAddBookModal, addBookModal }) => {
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="nav navbar-nav ms-auto">
               <li class="nav-item">
-                {/* <a class="nav-link" aria-current="page" onClick={handleClick}>
-                  See-Products
-                </a> */}
+                <a class="nav-link" aria-current="page" href="/authorize">
+                  Authorize-Reader
+                </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" onClick={toggleModal}>

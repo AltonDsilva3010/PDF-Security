@@ -46,3 +46,7 @@ body {
 .all-books button {
   padding: 3px;
 }
+
+.books-all {
+  display: flex;
+}
